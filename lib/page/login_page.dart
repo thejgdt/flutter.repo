@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:qrscanner/page/profile_page.dart';
+import 'package:qrscanner/page/scanner_page.dart';
+import 'package:qrscanner/page/about_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
@@ -38,9 +41,9 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            menu("QR Code Scan", Icons.qr_code),
-            menu("My Profile", Icons.person),
-            menu("About App", Icons.info)
+            menu(menu: "QR Scan", icon: Icons.qr_code, page: const ScannerPage(), context: context),
+            menu(menu: "My Profile", icon: Icons.person, page: const ProfilePage(), context: context),
+            menu(menu: "About App", icon: Icons.info, page: const AboutPage(), context: context),
           ],
         ),
       ),
@@ -210,13 +213,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget menu(String menu, IconData icon) {
+  Widget menu({
+    required String menu,
+    required IconData icon,
+    required Widget page,
+    required BuildContext context,
+  }) {
     return Column(
       children: [
         InkWell(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (countext) => const LoginPage()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => page));
           },
           child: Padding(
             padding: const EdgeInsets.all(16.0),
