@@ -14,12 +14,35 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.blue,
         title: const Text(
           "QR Code Scanner",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.qr_code_scanner, color: Colors.white, size: 64.0),
+                  Text(
+                    "QR CODE SCANNER",
+                    style: TextStyle(color: Colors.white, fontSize: 24.0),
+                  ),
+                ],
+              ),
+            ),
+            menu("QR Code Scan", Icons.qr_code),
+            menu("My Profile", Icons.person),
+            menu("About App", Icons.info)
+          ],
+        ),
       ),
       body: Column(
         children: [
@@ -184,6 +207,30 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget menu(String menu, IconData icon) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (countext) => const LoginPage()));
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Icon(icon),
+                const SizedBox(width: 8.0),
+                Text(menu),
+              ],
+            ),
+          ),
+        ),
+        const Divider(),
+      ],
     );
   }
 }
