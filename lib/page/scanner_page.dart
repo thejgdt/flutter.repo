@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
+import 'package:clipboard/clipboard.dart';
 
 class ScannerPage extends StatefulWidget {
-  const ScannerPage({super.key});
+  const ScannerPage({Key? key}) : super(key: key);
 
   @override
   State<ScannerPage> createState() => _ScannerPageState();
@@ -51,6 +52,15 @@ class _ScannerPageState extends State<ScannerPage> {
                       textColor: Colors.white,
                       fontSize: 16.0,
                     );
+                    FlutterClipboard.copy(res).then((value) =>
+                        Fluttertoast.showToast(
+                            msg: "Teks berhasil disalin ke clipboard",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.blue,
+                            textColor: Colors.white,
+                            fontSize: 16.0));
                   }
                 },
                 child: const Text("Scan QR Code"),
